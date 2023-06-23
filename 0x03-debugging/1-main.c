@@ -1,4 +1,3 @@
-Copy code
 #include <stdio.h>
 
 /**
