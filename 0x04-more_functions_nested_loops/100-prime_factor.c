@@ -25,3 +25,13 @@ long largest_prime_factor(long n)
     else
         return i;
 }
+
+int main(void)
+{
+    long number = 612852475143;
+    long largest_prime = largest_prime_factor(number);
+
+    printf("%ld\n", largest_prime);
+
+    return 0;
+}
