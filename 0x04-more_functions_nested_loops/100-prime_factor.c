@@ -9,25 +9,30 @@
  */
 long largest_prime_factor(long n)
 {
-	long i;
+    long i;
 
-	for (i = 2; i <= sqrt(n); i++)
-	{
-		if (n % i == 0)
-		{
-			while (n % i == 0)
-			{
-				n = n/i;
-			}
-		}
-	}
+    for (i = 2; i <= sqrt(n); i++)
+    {
+        if (n % i == 0)
+        {
+            while (n % i == 0)
+                n /= i;
+        }
+    }
 
-	if (n > 1)
-	{
-		return (n);
-	}
-	else
-	{
-		return (i);
-	}
+    if (n > 1)
+        return n;
+    else
+        return i;
 }
+
+int main(void)
+{
+    long number = 612852475143;
+    long largest_prime = largest_prime_factor(number);
+
+    printf("%ld\n", largest_prime);
+
+    return 0;
+}
+
