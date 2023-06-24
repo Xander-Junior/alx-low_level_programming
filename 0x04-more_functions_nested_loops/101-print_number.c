@@ -13,7 +13,7 @@ void print_number(int n)
 	}
 	else
 	{
-		n = n
+		n = n;
 	}
 
 	if (n / 10)
