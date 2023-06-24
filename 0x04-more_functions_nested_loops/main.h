@@ -14,6 +14,6 @@ void print_square(int size);
 void fizz_buzz(void);
 void print_triangle(int size);
 long largest_prime_factor(long n);
-
+void print_number(int n);
 
 #endif /* MAIN_H */
