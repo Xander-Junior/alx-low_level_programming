@@ -9,25 +9,19 @@
  */
 long largest_prime_factor(long n)
 {
-	long i;
+    long i;
 
-	for (i = 2; i <= sqrt(n); i++)
-	{
-		if (n % i == 0)
-		{
-			while (n % i == 0)
-			{
-				n /= i;
-			}
-		}
-	}
+    for (i = 2; i <= sqrt(n); i++)
+    {
+        if (n % i == 0)
+        {
+            while (n % i == 0)
+                n /= i;
+        }
+    }
 
-	if (n > 1)
-	{
-		return (n);
-	}
-	else
-	{
-		return (i);
-	}
+    if (n > 1)
+        return n;
+    else
+        return i;
 }
