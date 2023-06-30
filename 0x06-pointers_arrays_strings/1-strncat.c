@@ -28,5 +28,5 @@ char *_strncat(char *dest, char *src, int n)
 	/* Add the null terminator */
 	dest[dest_len] = '\0';
 
-	return dest;
+	return (dest);
 }
