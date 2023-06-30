@@ -11,5 +11,6 @@ char *leet(char *str);
 char *rot13(char *str);
 int _putchar(char c);
 void print_number(int n);
+char *_strncpy(char *dest, char *src, int n);
 
 #endif /* MAIN_H */
