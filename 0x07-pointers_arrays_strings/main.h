@@ -1,5 +1,7 @@
 #ifndef MAIN_H
 #define MAIN_H
+#include <stddef.h>
+#include <stdio.h>
 
 /* Function prototypes */
 int _putchar(char c);
