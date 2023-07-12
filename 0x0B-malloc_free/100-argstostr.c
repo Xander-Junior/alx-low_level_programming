@@ -1,4 +1,4 @@
-i#include "main.h"
+#include "main.h"
 /**
 * argstostr - a function that concatenates all the arguments of your program
 *@ac: count of args passed to the function
