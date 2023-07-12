@@ -2,6 +2,29 @@
 #include <stdlib.h>
 
 /**
+ * count_words - Counts the number of words in a string.
+ * @str: The input string.
+ *
+ * Return: The number of words.
+ */
+int count_words(char *str)
+{
+	int count = 0, i = 0;
+
+	while (str[i])
+	{
+		if (str[i] != ' ' && (str[i + 1] == ' ' || str[i + 1] == '\0'))
+		{
+			count++;
+		}
+		i++;
+	}
+
+	return (count);
+}
+
+
+/**
  * strtow - Splits a string into words.
  * @str: The input string.
  *
@@ -9,105 +32,64 @@
  */
 char **strtow(char *str)
 {
-	int words = 0, i = 0, j = 0, temp = 0, size = 0;
-	char **split = NULL;
+	char **words;
+	int i, j, k, len, count;
 
 	if (str == NULL || *str == '\0')
 	{
-		return (NULL);
+		return NULL;
 	}
 
-	words = num_words(str);
-	if (words == 0)
+	count = count_words(str);
+
+	words = malloc(sizeof(char *) * (count + 1));
+	if (words == NULL)
 	{
 		return (NULL);
 	}
 
-	split = (char **)malloc(sizeof(char *) * (words + 1));
-	if (split == NULL)
-	{
-		return (NULL);
-	}
+	i = 0;
+	j = 0;
 
-	for (i = 0; str[i] != '\0' && j < words; i++)
+	while (str[i])
 	{
 		if (str[i] != ' ')
 		{
-			size++;
-		}
-		else if (str[i] == ' ' && size > 0)
-		{
-			split[j] = (char *)malloc(sizeof(char) * (size + 1));
-			if (split[j] == NULL)
+			len = 0;
+			k = i;
+			while (str[k] && str[k] != ' ')
 			{
-				for (j = 0; j < i; j++)
+				len++;
+				k++;
+			}
+
+			words[j] = malloc(sizeof(char) * (len + 1));
+			if (words[j] == NULL)
+			{
+				for (i = 0; i < j; i++)
 				{
-					free(split[j]);
+					free(words[i]);
 				}
-				free(split);
+				free(words);
 				return (NULL);
 			}
-			for (temp = 0; temp < size; temp++)
+
+			k = 0;
+			while (str[i] && str[i] != ' ')
 			{
-				split[j][temp] = str[i - size + temp];
-			}
-			split[j][temp] = '\0';
-			size = 0;
-			j++;
-		}
-	}
-
-	split[j] = NULL;
-	return (NULL);
-}
-
-/**
- * num_words - Counts the number of words in a string.
- * @str: The input string.
- *
- * Return: The number of words.
- */
-int num_words(char *str)
-{
-	int i = 0, words = 0;
-
-	while (str[i] != '\0')
-	{
-		if (str[i] != ' ')
-		{
-			words++;
-			while (str[i] != ' ' && str[i] != '\0')
-			{
+				words[j][k] = str[i];
+				k++;
 				i++;
 			}
+			words[j][k] = '\0';
+			j++;
 		}
 		else
 		{
 			i++;
 		}
 	}
+	words[j] = NULL;
 
 	return (words);
-}
-
-
-/**
- * len - Returns the length of a string.
- * @str: The input string.
- *
- * Return: The length of the string.
- */
-int len(char *str)
-{
-	int length = 0;
-
-	if (str != NULL)
-	{
-		while (str[length] != '\0')
-		{
-			length++;
-		}
-	}
-
-	return (length);
 }
