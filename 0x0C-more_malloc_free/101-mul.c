@@ -69,40 +69,41 @@ int is_valid_number(char *str)
  */
 char *multiply_numbers(char *num1, char *num2)
 {
-	int len1, len2, result_len;
+	int len1, len2, result_len, start, i, j, carry, digit1, digit2, product;
 	int *result;
-	int i, j, carry, digit1, digit2, product;
-	int start;
 	char *product_str;
 
 	len1 = _strlen(num1);
 	len2 = _strlen(num2);
 	result_len = len1 + len2;
 	result = _calloc(result_len, sizeof(int));
-
 	if (result == NULL)
 		return (NULL);
 	for (i = len1 - 1; i >= 0; i--)
+	{
 		carry = 0;
 		digit1 = num1[i] - '0';
-
 		for (j = len2 - 1; j >= 0; j--)
+		{
 			digit2 = num2[j] - '0';
 			product = digit1 * digit2 + result[i + j + 1] + carry;
 			result[i + j + 1] = product % 10;
 			carry = product / 10;
+		}
 		if (carry > 0)
 			result[i + j + 1] += carry;
+	}
 	start = 0;
 	while (start < result_len && result[start] == 0)
 		start++;
 	if (start == result_len)
 		start--;
 	product_str = malloc(result_len - start + 1);
-
 	if (product_str == NULL)
+	{
 		free(result);
 		return (NULL);
+	}
 	for (i = 0; i < result_len - start; i++)
 		product_str[i] = result[start + i] + '0';
 	product_str[i] = '\0';

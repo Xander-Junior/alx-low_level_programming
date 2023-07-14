@@ -12,5 +12,6 @@ int is_valid_number(char *str);
 char *multiply_numbers(char *num1, char *num2);
 int _strlen(char *str);
 void *_calloc(unsigned int nmemb, unsigned int size);
+int _putchar(char c);
 
 #endif /* MAIN_H */
