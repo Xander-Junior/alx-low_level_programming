@@ -11,22 +11,26 @@
  */
 int main(int argc, char *argv[])
 {
+	char *num1;
+	char *num2;
+	char *result;
+
 	if (argc != 3)
 	{
 		printf("Error\n");
 		return (98);
 	}
 
-	if (!is_valid_number(argv[1]) || !is_valid_number(argv[2]))
+	num1 = argv[1];
+	num2 = argv[2];
+
+	if (!is_valid_number(num1) || !is_valid_number(num2))
 	{
 		printf("Error\n");
 		return (98);
 	}
 
-	char *num1 = argv[1];
-	char *num2 = argv[2];
-
-	char *result = multiply_numbers(num1, num2);
+	result = multiply_numbers(num1, num2);
 	if (result == NULL)
 	{
 		printf("Error\n");
@@ -36,9 +40,8 @@ int main(int argc, char *argv[])
 	printf("%s\n", result);
 	free(result);
 
-	return 0;
+	return (0);
 }
-
 
 /**
  * is_valid_number - Check if a string is a valid positive number
@@ -51,12 +54,11 @@ int is_valid_number(char *str)
 	while (*str)
 	{
 		if (*str < '0' || *str > '9')
-			return 0;
+			return (0);
 		str++;
 	}
-	return 1;
+	return (1);
 }
-
 
 /**
  * multiply_numbers - Multiply two positive numbers
@@ -67,56 +69,46 @@ int is_valid_number(char *str)
  */
 char *multiply_numbers(char *num1, char *num2)
 {
-	int len1 = _strlen(num1);
-	int len2 = _strlen(num2);
-	int result_len = len1 + len2;
-	int *result = _calloc(result_len, sizeof(int));
+	int len1, len2, result_len;
+	int *result;
+	int i, j, carry, digit1, digit2, product;
+	int start;
+	char *product_str;
+
+	len1 = _strlen(num1);
+	len2 = _strlen(num2);
+	result_len = len1 + len2;
+	result = _calloc(result_len, sizeof(int));
 
 	if (result == NULL)
 		return (NULL);
-
-	int i, j, carry, digit1, digit2, product;
-
 	for (i = len1 - 1; i >= 0; i--)
-	{
 		carry = 0;
 		digit1 = num1[i] - '0';
 
 		for (j = len2 - 1; j >= 0; j--)
-		{
 			digit2 = num2[j] - '0';
 			product = digit1 * digit2 + result[i + j + 1] + carry;
 			result[i + j + 1] = product % 10;
 			carry = product / 10;
-		}
-
 		if (carry > 0)
 			result[i + j + 1] += carry;
-	}
-
-	int start = 0;
+	start = 0;
 	while (start < result_len && result[start] == 0)
 		start++;
-
 	if (start == result_len)
 		start--;
+	product_str = malloc(result_len - start + 1);
 
-	char *product_str = malloc(result_len - start + 1);
 	if (product_str == NULL)
-	{
 		free(result);
 		return (NULL);
-	}
-
 	for (i = 0; i < result_len - start; i++)
 		product_str[i] = result[start + i] + '0';
 	product_str[i] = '\0';
-
 	free(result);
-
-	return product_str;
+	return (product_str);
 }
-
 
 /**
  * _strlen - Calculate the length of a string
@@ -127,10 +119,12 @@ char *multiply_numbers(char *num1, char *num2)
 int _strlen(char *str)
 {
 	int len = 0;
+
 	while (str[len] != '\0')
 		len++;
 	return (len);
 }
+
 
 /**
  * _calloc - Allocate memory for an array and set all elements to 0
@@ -141,17 +135,16 @@ int _strlen(char *str)
  */
 void *_calloc(unsigned int nmemb, unsigned int size)
 {
-	if (nmemb == 0 || size == 0)
-		return (NULL);
-
 	unsigned int i;
 	void *ptr = malloc(nmemb * size);
+	char *p;
+
 	if (ptr == NULL)
 		return (NULL);
 
-	char *p = ptr;
+	p = ptr;
 	for (i = 0; i < nmemb * size; i++)
-		 p[i] = 0;
+		p[i] = 0;
 
 	return (ptr);
 }
