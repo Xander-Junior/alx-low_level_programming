@@ -31,6 +31,7 @@ int _strlen(char *str)
 char *_strcopy(char *dest, char *src)
 {
 	char *ptr = dest;
+
 	while (*src)
 	{
 		*ptr = *src;
@@ -64,7 +65,7 @@ dog_t *new_dog(char *name, float age, char *owner)
 
 	new_dog = malloc(sizeof(dog_t));
 	if (new_dog == NULL)
-		return NULL;
+		return (NULL);
 
 	new_name = malloc((name_length + 1) * sizeof(char));
 	new_owner = malloc((owner_length + 1) * sizeof(char));
@@ -75,7 +76,7 @@ dog_t *new_dog(char *name, float age, char *owner)
 		free(new_owner);
 		return (NULL);
 	}
-	
+
 	_strcopy(new_name, name);
 	_strcopy(new_owner, owner);
 
