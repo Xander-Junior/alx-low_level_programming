@@ -1,11 +1,11 @@
 #ifndef FUNCTION_POINTERS_H
 #define FUNCTION_POINTERS_H
 
-/* Include any necessary header files here */
+#include <stdio.h>
+#include <stdlib.h>
 
-/* Function prototype for the print_name function */
+/* Function prototypes */
 void print_name(char *name, void (*f)(char *));
-
-/* Add any other function prototypes or declarations here if needed */
+void array_iterator(int *array, size_t size, void (*action)(int));
 
 #endif /* FUNCTION_POINTERS_H */
