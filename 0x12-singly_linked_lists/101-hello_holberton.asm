@@ -1,16 +1,19 @@
 section .data
-msg db "Hello, Holberton", 0Ah
-l equ $ - msg
-section .text
-global main
-main:
-mov rax, 1
-mov rdi, 1
-mov rsi, msg
-mov rdx, l
-syscall
+    msg db "Hello, Holberton", 0Ah  ; 0Ah is the ASCII code for newline
+    l equ $ - msg                   ; l is the length of the message
 
-mov rax, 60
-mov rdi, 0
-syscall
+section .text
+    global main
+
+main:
+    mov rax, 1      ; syscall number for sys_write
+    mov rdi, 1      ; file descriptor 1 (stdout)
+    mov rsi, msg    ; pointer to the string
+    mov rdx, l      ; string length
+    syscall
+
+    mov rax, 60     ; syscall number for sys_exit
+    xor rdi, rdi    ; exit status 0
+    syscall
+
 end:
