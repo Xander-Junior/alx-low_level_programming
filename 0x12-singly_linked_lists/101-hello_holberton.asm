@@ -1,15 +1,16 @@
 section .data
-    hello db 'Hello, Holberton', 0
-
+msg db "Hello, Holberton", 0Ah
+l equ $ - msg
 section .text
-    extern printf, exit
-
 global main
 main:
-    ; Prepare arguments to call printf
-    lea rdi, [hello]  ; Load address of hello string into rdi
-    call printf
+mov rax, 1
+mov rdi, 1
+mov rsi, msg
+mov rdx, l
+syscall
 
-    ; Exit the program
-    xor edi, edi        ; status: 0
-    call exit
+mov rax, 60
+mov rdi, 0
+syscall
+end:
